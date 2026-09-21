@@ -17,7 +17,135 @@ body {
   position: relative;
 }
 
-/* Partículas del cielo */
+/* Pantalla de Intro / Terminal */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #090A0F;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.terminal-box {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 117, 140, 0.3);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 440px;
+  width: 100%;
+  font-family: 'Fira Code', monospace;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.terminal-header {
+  font-size: 1.1rem;
+  color: #ff758c;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  height: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff758c, #ffd700);
+  transition: width 0.1s linear;
+}
+
+#progress-text {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.check-item {
+  display: flex;
+  justify-content: space-between;
+  color: #8892b0;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+
+.check-item.active {
+  opacity: 1;
+  color: #fff;
+}
+
+/* Estilo Error 404 */
+.error-container {
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.error-code {
+  font-size: 2.5rem;
+  color: #ff758c;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.error-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.error-quote {
+  font-style: italic;
+  font-size: 1rem;
+  color: #e2e8f0;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 10px;
+  border-left: 3px solid #ff758c;
+}
+
+.error-emoji {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.btn-start {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+  color: white;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+  transition: transform 0.2s;
+}
+
+.btn-start:hover {
+  transform: scale(1.02);
+}
+
+/* Cielo de Estrellas y Tarjeta Principal */
 #sky {
   position: fixed;
   top: 0;
@@ -41,7 +169,6 @@ body {
   100% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Tarjeta Central */
 .card {
   position: relative;
   z-index: 2;
@@ -68,7 +195,7 @@ body {
   margin-bottom: 12px;
 }
 
-h1 {
+.card h1 {
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 10px;
@@ -81,7 +208,6 @@ h1 {
   margin-bottom: 25px;
 }
 
-/* Botones de Estrellas */
 .stars-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -105,7 +231,6 @@ h1 {
 
 .star-btn .icon {
   font-size: 1.8rem;
-  transition: transform 0.3s;
 }
 
 .star-btn .label {
@@ -124,7 +249,6 @@ h1 {
   background: rgba(255, 117, 140, 0.15);
 }
 
-/* Área de mensajes */
 .memory-box {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 16px;
@@ -140,7 +264,6 @@ h1 {
   color: #ffebef;
 }
 
-/* Botón Carta */
 .btn-letter {
   margin-top: 25px;
   width: 100%;
@@ -153,7 +276,6 @@ h1 {
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
-  animation: bounce 1.5s infinite;
 }
 
 /* Modal Carta */
@@ -228,9 +350,4 @@ h1 {
 @keyframes scaleUp {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
 }
