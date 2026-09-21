@@ -159,7 +159,7 @@ const CONFIG = {
             title: "Una canción",
 
             text:
-                "Aquí después vamos a poner una canción que tenga algún significado especial para nosotros."
+                "Aquí después vamos a poner una canción que tenga algún significado especial para nosotros. (Fast and F......."
 
         },
 
@@ -171,7 +171,7 @@ const CONFIG = {
             title: "Una carta escondida",
 
             text:
-                "Esta caja guarda una pequeña parte de todo lo que todavía quiero decirte."
+                "Hoy cumplimos otro ciclo juntos y no hay día en que no agradezca haberte conocido. No necesité llenar una pared de fotos para saber que cada recuerdo a tu lado está guardado en mi corazón. Gracias por tu paciencia, por tu sonrisa en los días difíciles, por tus abrazos que me dan paz y por elegir compartir tu tiempo conmigo."
 
         },
 
