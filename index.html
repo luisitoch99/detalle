@@ -1,30 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Una pequeña aventura ❤️</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- Fondo -->
+
+    <!-- =========================================
+         FONDO
+    ========================================== -->
+
     <div class="background">
+
         <div class="stars"></div>
+
         <div class="glow glow-1"></div>
+
         <div class="glow glow-2"></div>
+
     </div>
 
-    <!-- ========================================= -->
-    <!-- INTRO -->
-    <!-- ========================================= -->
+
+
+    <!-- =========================================
+         JUEGO
+    ========================================== -->
 
     <main id="game">
 
-        <section class="screen active" id="intro">
+
+        <!-- =====================================
+             INTRO
+        ====================================== -->
+
+        <section
+            class="screen active"
+            id="intro"
+        >
 
             <div class="intro-content">
 
@@ -32,28 +58,45 @@
                     UNA EXPERIENCIA EXCLUSIVA
                 </div>
 
+
                 <div class="heart-logo">
                     ♥
                 </div>
+
 
                 <h1>
                     Tengo algo<br>
                     que enseñarte.
                 </h1>
 
+
                 <p class="intro-text">
+
                     No es una carta.<br>
+
                     No es exactamente un juego.<br>
+
                     Es algo que hice especialmente para ti.
+
                 </p>
 
-                <button class="main-button" onclick="startGame()">
+
+                <button
+                    class="main-button"
+                    onclick="startGame()"
+                >
+
                     COMENZAR
+
                     <span>→</span>
+
                 </button>
 
+
                 <div class="tiny-text">
-                    Volumen recomendado: 🔊
+
+                    Una pequeña aventura ❤️
+
                 </div>
 
             </div>
@@ -61,43 +104,74 @@
         </section>
 
 
-        <!-- ========================================= -->
-        <!-- NIVEL 1 -->
-        <!-- ========================================= -->
 
-        <section class="screen" id="level1">
+        <!-- =====================================
+             NIVEL 1
+        ====================================== -->
+
+        <section
+            class="screen"
+            id="level1"
+        >
 
             <div class="game-header">
-                <span>NIVEL 01</span>
-                <span id="progress1">01 / 04</span>
+
+                <span>
+                    NIVEL 01
+                </span>
+
+                <span id="progress1">
+                    01 / 04
+                </span>
+
             </div>
 
+
             <div class="question-container">
+
 
                 <div class="level-icon">
                     🧠
                 </div>
+
 
                 <h2>
                     Vamos a comprobar<br>
                     qué tanto me conoces.
                 </h2>
 
+
                 <p class="question-subtitle">
-                    No te preocupes... algunas preguntas tienen trampa.
+
+                    No te preocupes...
+                    algunas preguntas tienen trampa.
+
                 </p>
+
 
                 <div id="question-box">
 
-                    <div class="question-number">
+
+                    <div
+                        class="question-number"
+                        id="question-number"
+                    >
                         PREGUNTA 01
                     </div>
 
+
                     <h3 id="question">
-                        ¿Cuál de estas opciones describe mejor una cita perfecta?
+
+                        Cargando pregunta...
+
                     </h3>
 
-                    <div id="answers" class="answers"></div>
+
+                    <div
+                        id="answers"
+                        class="answers"
+                    ></div>
+
 
                 </div>
 
@@ -106,100 +180,182 @@
         </section>
 
 
-        <!-- ========================================= -->
-        <!-- RESULTADO NIVEL 1 -->
-        <!-- ========================================= -->
 
-        <section class="screen" id="result1">
+        <!-- =====================================
+             RESULTADO NIVEL 1
+        ====================================== -->
+
+        <section
+            class="screen"
+            id="result1"
+        >
 
             <div class="result-content">
+
 
                 <div class="result-icon">
                     ✓
                 </div>
 
+
                 <div class="small-label">
                     ANÁLISIS COMPLETADO
                 </div>
+
 
                 <h2>
                     Interesante...
                 </h2>
 
+
                 <p id="result-text">
                     Parece que sabes bastante de mí.
                 </p>
 
+
                 <div class="loading-bar">
-                    <div id="compatibility-bar"></div>
+
+                    <div
+                        id="compatibility-bar"
+                    ></div>
+
                 </div>
+
 
                 <div class="compatibility">
-                    <span>COMPATIBILIDAD</span>
-                    <strong id="compatibility-number">0%</strong>
+
+                    <span>
+                        COMPATIBILIDAD
+                    </span>
+
+                    <strong
+                        id="compatibility-number"
+                    >
+                        0%
+                    </strong>
+
                 </div>
 
-                <button class="main-button" onclick="goTo('level2')">
+
+                <button
+                    class="main-button"
+                    onclick="startLevel2()"
+                >
+
                     CONTINUAR
+
                     <span>→</span>
+
                 </button>
+
 
             </div>
 
         </section>
 
 
-        <!-- ========================================= -->
-        <!-- NIVEL 2 -->
-        <!-- ========================================= -->
 
-        <section class="screen" id="level2">
+        <!-- =====================================
+             NIVEL 2
+        ====================================== -->
+
+        <section
+            class="screen"
+            id="level2"
+        >
 
             <div class="game-header">
-                <span>NIVEL 02</span>
-                <span>¿QUIÉN ES MÁS PROBABLE?</span>
+
+                <span>
+                    NIVEL 02
+                </span>
+
+                <span id="who-progress">
+                    01 / 05
+                </span>
+
             </div>
 
+
             <div class="question-container">
+
 
                 <div class="level-icon">
                     😂
                 </div>
+
 
                 <h2>
                     Ahora viene<br>
                     la parte peligrosa.
                 </h2>
 
+
                 <p class="question-subtitle">
-                    Elige con cuidado. Yo también voy a ver tus respuestas.
+
+                    Elige con cuidado.
+                    Yo también voy a ver tus respuestas.
+
                 </p>
+
 
                 <div id="who-question-box">
 
-                    <div class="question-number">
+
+                    <div
+                        class="question-number"
+                        id="who-question-number"
+                    >
                         PREGUNTA 01
                     </div>
 
+
                     <h3 id="who-question">
-                        ¿Quién es más probable que diga "ya voy" cuando todavía no está listo?
+
+                        Cargando pregunta...
+
                     </h3>
+
 
                     <div class="duel-buttons">
 
-                        <button onclick="answerWho('her')">
-                            <span class="avatar">👩</span>
-                            <span id="her-name">TÚ</span>
+
+                        <button
+                            onclick="answerWho('her')"
+                            id="her-button"
+                        >
+
+                            <span class="avatar">
+                                👩
+                            </span>
+
+                            <span id="her-name">
+                                TÚ
+                            </span>
+
                         </button>
+
 
                         <div class="vs">
                             VS
                         </div>
 
-                        <button onclick="answerWho('me')">
-                            <span class="avatar">👨</span>
-                            <span>YO</span>
+
+                        <button
+                            onclick="answerWho('me')"
+                            id="me-button"
+                        >
+
+                            <span class="avatar">
+                                👨
+                            </span>
+
+                            <span>
+                                YO
+                            </span>
+
                         </button>
+
 
                     </div>
 
@@ -210,273 +366,452 @@
         </section>
 
 
-        <!-- ========================================= -->
-        <!-- RESULTADO NIVEL 2 -->
-        <!-- ========================================= -->
 
-        <section class="screen" id="result2">
+        <!-- =====================================
+             RESULTADO NIVEL 2
+        ====================================== -->
+
+        <section
+            class="screen"
+            id="result2"
+        >
 
             <div class="result-content">
+
 
                 <div class="result-icon laughing">
                     😂
                 </div>
 
+
                 <div class="small-label">
                     RESULTADO OFICIAL
                 </div>
 
-                <h2 id="who-result-title">
-                    Decisión registrada.
+
+                <h2>
+                    Investigación terminada.
                 </h2>
+
 
                 <p id="who-result">
                     El sistema ha tomado nota.
                 </p>
 
+
                 <div class="warning-box">
+
                     ⚠️ Esta información podría ser utilizada
                     en futuras discusiones.
+
                 </div>
 
-                <button class="main-button" onclick="goTo('level3')">
-                    SIGUIENTE
+
+                <button
+                    class="main-button"
+                    onclick="goTo('level3')"
+                >
+
+                    CONTINUAR
+
                     <span>→</span>
+
                 </button>
+
 
             </div>
 
         </section>
 
 
-        <!-- ========================================= -->
-        <!-- NIVEL 3 - CAJAS -->
-        <!-- ========================================= -->
 
-        <section class="screen" id="level3">
+        <!-- =====================================
+             NIVEL 3
+        ====================================== -->
+
+        <section
+            class="screen"
+            id="level3"
+        >
 
             <div class="game-header">
-                <span>NIVEL 03</span>
-                <span>OBJETOS ENCONTRADOS</span>
+
+                <span>
+                    NIVEL 03
+                </span>
+
+                <span>
+                    OBJETOS ENCONTRADOS
+                </span>
+
             </div>
 
+
             <div class="boxes-content">
+
 
                 <div class="level-icon">
                     🎁
                 </div>
+
 
                 <h2>
                     Encontré algunas cosas<br>
                     que quiero darte.
                 </h2>
 
+
                 <p class="question-subtitle">
+
                     Pero tendrás que abrirlas.
+
                 </p>
+
 
                 <div class="gift-grid">
 
-                    <button class="gift" onclick="openGift(1)">
-                        <span>🎁</span>
-                        <small>OBJETO 01</small>
+
+                    <button
+                        class="gift"
+                        id="gift1"
+                        onclick="openGift(1)"
+                    >
+
+                        <span>
+                            🎁
+                        </span>
+
+                        <small>
+                            OBJETO 01
+                        </small>
+
                     </button>
 
-                    <button class="gift" onclick="openGift(2)">
-                        <span>🎧</span>
-                        <small>OBJETO 02</small>
+
+                    <button
+                        class="gift"
+                        id="gift2"
+                        onclick="openGift(2)"
+                    >
+
+                        <span>
+                            🎧
+                        </span>
+
+                        <small>
+                            OBJETO 02
+                        </small>
+
                     </button>
 
-                    <button class="gift" onclick="openGift(3)">
-                        <span>💌</span>
-                        <small>OBJETO 03</small>
+
+                    <button
+                        class="gift"
+                        id="gift3"
+                        onclick="openGift(3)"
+                    >
+
+                        <span>
+                            💌
+                        </span>
+
+                        <small>
+                            OBJETO 03
+                        </small>
+
                     </button>
 
-                    <button class="gift locked" id="gift4" onclick="openGift(4)">
-                        <span>🔒</span>
-                        <small>OBJETO 04</small>
+
+                    <button
+                        class="gift locked"
+                        id="gift4"
+                        onclick="openGift(4)"
+                    >
+
+                        <span>
+                            🔒
+                        </span>
+
+                        <small>
+                            OBJETO 04
+                        </small>
+
                     </button>
+
 
                 </div>
 
+
                 <p class="boxes-counter">
-                    <span id="opened-count">0</span> / 4 desbloqueados
+
+                    <span id="opened-count">
+                        0
+                    </span>
+
+                    / 4 desbloqueados
+
                 </p>
+
+
+                <div id="final-unlock"></div>
+
 
             </div>
 
         </section>
 
 
-        <!-- ========================================= -->
-        <!-- MODAL DE REGALO -->
-        <!-- ========================================= -->
 
-        <div class="modal" id="gift-modal">
+        <!-- =====================================
+             MODAL REGALO
+        ====================================== -->
+
+        <div
+            class="modal"
+            id="gift-modal"
+        >
 
             <div class="modal-card">
 
-                <button class="close-modal" onclick="closeGift()">
+
+                <button
+                    class="close-modal"
+                    onclick="closeGift()"
+                >
                     ×
                 </button>
 
-                <div id="gift-icon" class="modal-icon">
+
+                <div
+                    id="gift-icon"
+                    class="modal-icon"
+                >
                     🎁
                 </div>
 
-                <div class="small-label" id="gift-label">
+
+                <div
+                    class="small-label"
+                    id="gift-label"
+                >
                     OBJETO ENCONTRADO
                 </div>
+
 
                 <h2 id="gift-title">
                     Algo para ti
                 </h2>
 
+
                 <p id="gift-text">
                     ...
                 </p>
 
-                <button class="main-button small-button" onclick="closeGift()">
+
+                <button
+                    class="main-button small-button"
+                    onclick="closeGift()"
+                >
+
                     CERRAR
+
                 </button>
+
 
             </div>
 
         </div>
 
 
-        <!-- ========================================= -->
-        <!-- NIVEL 4 -->
-        <!-- ========================================= -->
 
-        <section class="screen" id="level4">
+        <!-- =====================================
+             NIVEL FINAL
+        ====================================== -->
+
+        <section
+            class="screen"
+            id="level4"
+        >
 
             <div class="final-content">
+
 
                 <div class="final-symbol">
                     ∞
                 </div>
 
+
                 <div class="small-label">
                     ÚLTIMO NIVEL
                 </div>
+
 
                 <h2>
                     Hay algo que<br>
                     quiero decirte.
                 </h2>
 
+
                 <p>
                     Y esta vez no tienes que responder nada.
                 </p>
 
-                <button class="main-button" onclick="showLetter()">
+
+                <button
+                    class="main-button"
+                    onclick="showLetter()"
+                >
+
                     ABRIR
-                    <span>♡</span>
+
+                    <span>
+                        ♡
+                    </span>
+
                 </button>
+
 
             </div>
 
         </section>
 
 
-        <!-- ========================================= -->
-        <!-- CARTA -->
-        <!-- ========================================= -->
 
-        <section class="screen" id="letter">
+        <!-- =====================================
+             CARTA
+        ====================================== -->
+
+        <section
+            class="screen"
+            id="letter"
+        >
 
             <div class="letter-container">
+
 
                 <div class="letter-top">
                     PARA TI
                 </div>
 
+
                 <div class="letter-card">
+
 
                     <div class="letter-heart">
                         ♥
                     </div>
 
+
                     <h2>
                         Feliz aniversario.
                     </h2>
+
 
                     <p>
                         Bueno...
                     </p>
 
+
                     <p>
-                        Si llegaste hasta aquí, significa que
-                        sobreviviste a mi pequeño juego.
+                        Si llegaste hasta aquí,
+                        significa que sobreviviste
+                        a mi pequeño juego.
                     </p>
+
 
                     <p>
                         La verdad es que no sabía muy bien
                         cómo hacer algo especial para ti.
                     </p>
 
+
                     <p>
-                        Así que decidí hacer algo que fuera
+                        Así que decidí hacer algo
                         un poquito diferente.
                     </p>
 
+
                     <p>
-                        No tengo una colección gigante de fotos,
-                        ni soy la persona que recuerda perfectamente
-                        cada fecha y cada detalle.
+                        No tengo una colección gigante
+                        de fotos, ni soy la persona que
+                        recuerda perfectamente cada fecha
+                        y cada detalle.
                     </p>
+
 
                     <p>
                         Pero hay algo que sí sé.
                     </p>
 
+
                     <p class="important">
                         Me gusta tenerte en mi vida.
                     </p>
 
+
                     <p>
                         Y después de todo este tiempo,
-                        sigo queriendo descubrir todas las cosas
-                        que todavía nos faltan por vivir.
+                        sigo queriendo descubrir todas
+                        las cosas que todavía nos faltan
+                        por vivir.
                     </p>
+
 
                     <p>
                         Gracias por este año.
                     </p>
 
+
                     <p class="signature">
                         ❤️
                     </p>
 
+
                     <div class="signature-name">
+
                         Con cariño,<br>
-                        <strong>YO</strong>
+
+                        <strong>
+                            YO
+                        </strong>
+
                     </div>
+
 
                 </div>
 
+
                 <div class="final-message">
+
                     Esto no es el final.
                     <br>
                     Es apenas el primer capítulo.
+
                 </div>
+
 
             </div>
 
         </section>
 
+
     </main>
 
 
-    <!-- ========================================= -->
-    <!-- CONFETI -->
-    <!-- ========================================= -->
+
+    <!-- =========================================
+         CONFETI
+    ========================================== -->
 
     <div id="confetti-container"></div>
 
 
+
+    <!-- JAVASCRIPT -->
+
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
