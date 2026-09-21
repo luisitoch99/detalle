@@ -9,35 +9,48 @@
 </head>
 <body>
 
-  <!-- PANTALLA DE INICIO: Simulando el Análisis del Sistema -->
+  <!-- PANTALLA DE INICIO: Ingreso de Nombre -->
   <div id="intro-screen" class="intro-overlay">
     <div class="terminal-box">
-      <p class="terminal-header">ANALIZANDO RELACIÓN...</p>
       
-      <div class="progress-bar-container">
-        <div id="progress-fill"></div>
-      </div>
-      <p id="progress-text">0%</p>
-
-      <div class="checklist">
-        <div id="check-1" class="check-item">Recopilando recuerdos... <span class="mark">⏳</span></div>
-        <div id="check-2" class="check-item">Analizando conversaciones... <span class="mark">⏳</span></div>
-        <div id="check-3" class="check-item">Detectando momentos felices... <span class="mark">⏳</span></div>
-        <div id="check-4" class="check-item">Calculando compatibilidad... <span class="mark">⏳</span></div>
+      <!-- Paso 1: Pedir nombre -->
+      <div id="name-prompt-container">
+        <h2 class="terminal-title-big">Hola amor ❤️</h2>
+        <p class="subtitle" style="margin-bottom: 20px;">Para iniciar este viaje, escribe tu nombre:</p>
+        <input type="text" id="partner-name" placeholder="Tu nombre aquí..." autocomplete="off">
+        <button class="btn-start" onclick="startLoadingSequence()" style="margin-top: 15px;">Comenzar ✨</button>
       </div>
 
-      <!-- Resultado del Error 404 (Aparece al terminar la carga) -->
+      <!-- Paso 2: Simulador de Carga (Oculto al inicio) -->
+      <div id="loading-container" class="hidden">
+        <p class="terminal-header" id="analysis-title">ANALIZANDO RELACIÓN...</p>
+        
+        <div class="progress-bar-container">
+          <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0%</p>
+
+        <div class="checklist">
+          <div id="check-1" class="check-item">Recopilando recuerdos... <span class="mark">⏳</span></div>
+          <div id="check-2" class="check-item">Analizando conversaciones... <span class="mark">⏳</span></div>
+          <div id="check-3" class="check-item">Detectando momentos felices... <span class="mark">⏳</span></div>
+          <div id="check-4" class="check-item">Calculando compatibilidad... <span class="mark">⏳</span></div>
+        </div>
+      </div>
+
+      <!-- Paso 3: Error 404 (Oculto al inicio) -->
       <div id="error-container" class="error-container hidden">
         <h1 class="error-code">ERROR 404</h1>
-        <p class="error-title">No se puede calcular.</p>
+        <p class="error-title">No se puede calcular para <span id="display-name">mi amor</span>.</p>
         <p class="error-quote">"Hay cosas que no caben en un algoritmo."</p>
         <p class="error-emoji">😂❤️</p>
         <button class="btn-start" onclick="startExperience()">Entrar a nuestra historia ✨</button>
       </div>
+
     </div>
   </div>
 
-  <!-- FONDO DE ESTRELLAS Y EXPERIENCIA REAL (Oculto al inicio) -->
+  <!-- ESTRELLAS Y EXPERIENCIA PRINCIPAL -->
   <div id="sky"></div>
 
   <main id="main-content" class="card hidden">
@@ -47,7 +60,6 @@
       <p class="subtitle">Hay cosas que nunca te he dicho en voz alta, pero que siempre llevo conmigo.</p>
     </div>
 
-    <!-- Las 4 estrellas interactivas -->
     <div class="stars-grid">
       <button class="star-btn" onclick="revealMemory(0)">
         <span class="icon">✨</span>
@@ -67,18 +79,16 @@
       </button>
     </div>
 
-    <!-- Área de mensajes -->
     <div id="memory-display" class="memory-box hidden">
       <p id="memory-text"></p>
     </div>
 
-    <!-- Botón final de la carta -->
     <div id="final-action" class="hidden">
       <button class="btn-letter" onclick="openLetter()">💌 Abrir mi carta para ti</button>
     </div>
   </main>
 
-  <!-- Modal de la carta -->
+  <!-- Modal Carta -->
   <div id="letter-modal" class="modal hidden">
     <div class="modal-content">
       <button class="close-btn" onclick="closeLetter()">&times;</button>
