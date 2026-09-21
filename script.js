@@ -1,44 +1,61 @@
-// --- SIMULACIÓN DE CARGA / ANÁLISIS ---
-let progress = 0;
-const progressFill = document.getElementById('progress-fill');
-const progressText = document.getElementById('progress-text');
+let userName = "";
 
-const steps = [
-  { id: 'check-1', time: 500 },
-  { id: 'check-2', time: 1200 },
-  { id: 'check-3', time: 1900 },
-  { id: 'check-4', time: 2600 }
-];
-
-// Activar pasos de la checklist progresivamente
-steps.forEach(step => {
-  setTimeout(() => {
-    const el = document.getElementById(step.id);
-    el.classList.add('active');
-    el.querySelector('.mark').textContent = '✓';
-  }, step.time);
-});
-
-// Anular barra de progreso hasta el 87% y detenerse
-const loadingInterval = setInterval(() => {
-  if (progress < 87) {
-    progress++;
-    progressFill.style.width = progress + '%';
-    progressText.textContent = progress + '%';
-  } else {
-    clearInterval(loadingInterval);
-    // Mostrar el error 404 después de un segundo
-    setTimeout(() => {
-      document.querySelector('.terminal-header').style.display = 'none';
-      progressFill.parentElement.style.display = 'none';
-      progressText.style.display = 'none';
-      document.querySelector('.checklist').style.display = 'none';
-      document.getElementById('error-container').classList.remove('hidden');
-    }, 600);
+function startLoadingSequence() {
+  const input = document.getElementById('partner-name');
+  if (input.value.trim() === "") {
+    input.style.borderColor = "#ff758c";
+    input.placeholder = "¡Por favor escribe tu nombre, amor!";
+    return;
   }
-}, 30);
+  
+  userName = input.value.trim();
+  document.getElementById('display-name').textContent = userName;
+  document.getElementById('analysis-title').textContent = `ANALIZANDO RELACIÓN CON ${userName.toUpperCase()}...`;
 
-// Botón para entrar a la experiencia real
+  // Ocultar input y mostrar barra de carga
+  document.getElementById('name-prompt-container').classList.add('hidden');
+  document.getElementById('loading-container').classList.remove('hidden');
+
+  runLoadingBar();
+}
+
+function runLoadingBar() {
+  let progress = 0;
+  const progressFill = document.getElementById('progress-fill');
+  const progressText = document.getElementById('progress-text');
+
+  const steps = [
+    { id: 'check-1', time: 400 },
+    { id: 'check-2', time: 900 },
+    { id: 'check-3', time: 1400 },
+    { id: 'check-4', time: 1900 }
+  ];
+
+  steps.forEach(step => {
+    setTimeout(() => {
+      const el = document.getElementById(step.id);
+      if (el) {
+        el.classList.add('active');
+        el.querySelector('.mark').textContent = '✓';
+      }
+    }, step.time);
+  });
+
+  const loadingInterval = setInterval(() => {
+    if (progress < 87) {
+      progress++;
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress + '%';
+    } else {
+      clearInterval(loadingInterval);
+      setTimeout(() => {
+        document.getElementById('loading-container').classList.add('hidden');
+        document.getElementById('error-container').classList.remove('hidden');
+      }, 500);
+    }
+  }, 20);
+}
+
 function startExperience() {
   const intro = document.getElementById('intro-screen');
   const main = document.getElementById('main-content');
@@ -52,7 +69,6 @@ function startExperience() {
   }, 500);
 }
 
-// --- GENERAR FONDO DE ESTRELLAS ---
 function generateSky() {
   const sky = document.getElementById('sky');
   const starCount = 60;
@@ -71,7 +87,6 @@ function generateSky() {
   }
 }
 
-// --- MEMORIAS DE LAS ESTRELLAS ---
 const memories = [
   "✨ La primera vez que te vi reír con ganas: supe de inmediato que tu sonrisa iba a ser mi lugar seguro.",
   "✨ Tus abrazos espontáneos: no imaginas cómo me calmas y cómo me cambias cualquier mal día con un solo abrazo.",
