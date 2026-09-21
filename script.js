@@ -1,84 +1,121 @@
 /* =====================================================
-   CONFIGURACIÓN
-   =====================================================
+   CONFIGURACIÓN PRINCIPAL
 
-   ESTA PARTE LA VAMOS A PERSONALIZAR DESPUÉS.
+   AQUÍ VAMOS A PERSONALIZAR EL JUEGO DESPUÉS.
 
-   Por ahora NO necesita cambiar nada.
 ===================================================== */
+
 
 const CONFIG = {
 
+
+    /* ===============================================
+       NOMBRE DE ELLA
+    =============================================== */
+
     herName: "TÚ",
 
-    /* ---------------------------------------------
-       PREGUNTAS DEL NIVEL 1
-    --------------------------------------------- */
+
+    /* ===============================================
+       NIVEL 1
+    =============================================== */
 
     questions: [
 
         {
+
             question:
                 "¿Cuál de estas opciones describe mejor una cita perfecta?",
 
             answers: [
+
                 "Quedarnos juntos viendo algo",
+
                 "Salir a comer algo rico",
+
                 "Salir sin saber exactamente a dónde",
+
                 "Cualquier cosa mientras estemos juntos"
+
             ],
 
             correct: 3
+
         },
 
+
         {
+
             question:
                 "¿Qué creo que es más importante en una relación?",
 
             answers: [
+
                 "Tener siempre la razón",
+
                 "Poder reírnos juntos",
+
                 "No discutir nunca",
+
                 "Responder rápido los mensajes"
+
             ],
 
             correct: 1
+
         },
 
+
         {
+
             question:
                 "Si tuviéramos un día completamente libre, ¿qué elegiría?",
 
             answers: [
+
                 "Dormir todo el día",
+
                 "Hacer algo juntos",
+
                 "Trabajar 😭",
+
                 "No sé, probablemente improvisar"
+
             ],
 
             correct: 1
+
         },
 
+
         {
+
             question:
                 "Pregunta difícil... ¿quién tuvo más suerte?",
 
             answers: [
+
                 "Yo",
+
                 "Tú",
+
                 "Los dos",
+
                 "La pregunta está mal planteada 😂"
+
             ],
 
             correct: 2
+
         }
 
     ],
 
 
-    /* ---------------------------------------------
-       PREGUNTAS "QUIÉN ES MÁS PROBABLE"
-    --------------------------------------------- */
+
+    /* ===============================================
+       NIVEL 2
+    =============================================== */
 
     whoQuestions: [
 
@@ -95,38 +132,59 @@ const CONFIG = {
     ],
 
 
-    /* ---------------------------------------------
-       CONTENIDO DE LAS CAJAS
-    --------------------------------------------- */
+
+    /* ===============================================
+       REGALOS
+    =============================================== */
 
     gifts: {
 
+
         1: {
+
             icon: "🎁",
+
             title: "Una pequeña confesión",
+
             text:
                 "Hice este juego porque quería darte algo diferente. Algo que no fuera simplemente copiar una idea de internet y cambiarle el nombre."
+
         },
+
 
         2: {
+
             icon: "🎧",
+
             title: "Una canción",
+
             text:
                 "Aquí después vamos a poner una canción que tenga algún significado especial para nosotros."
+
         },
+
 
         3: {
+
             icon: "💌",
+
             title: "Una carta escondida",
+
             text:
                 "Esta caja guarda una pequeña parte de todo lo que todavía quiero decirte."
+
         },
 
+
         4: {
+
             icon: "🔮",
+
             title: "Algo que todavía no existe",
+
             text:
                 "Todavía no puedo enseñártelo porque es algo que tenemos que vivir primero."
+
         }
 
     }
@@ -134,11 +192,14 @@ const CONFIG = {
 };
 
 
+
 /* =====================================================
-   VARIABLES DEL JUEGO
+   VARIABLES
 ===================================================== */
 
+
 let currentQuestion = 0;
+
 let score = 0;
 
 let currentWhoQuestion = 0;
@@ -146,171 +207,320 @@ let currentWhoQuestion = 0;
 let openedGifts = 0;
 
 
+
 /* =====================================================
    INICIO
 ===================================================== */
 
+
 function startGame() {
 
-    goTo("level1");
+    currentQuestion = 0;
+
+    score = 0;
 
     loadQuestion();
 
+    goTo("level1");
+
 }
+
 
 
 /* =====================================================
    CAMBIAR DE PANTALLA
 ===================================================== */
 
+
 function goTo(screenId) {
 
-    const screens = document.querySelectorAll(".screen");
+
+    const screens =
+        document.querySelectorAll(".screen");
+
 
     screens.forEach(screen => {
+
         screen.classList.remove("active");
+
     });
 
-    const nextScreen = document.getElementById(screenId);
 
-    if (nextScreen) {
-        nextScreen.classList.add("active");
+    const nextScreen =
+        document.getElementById(screenId);
+
+
+    if (!nextScreen) {
+
+        console.error(
+            "No existe la pantalla:",
+            screenId
+        );
+
+        return;
+
     }
 
+
+    nextScreen.classList.add("active");
+
+
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
 
 }
+
 
 
 /* =====================================================
    NIVEL 1
 ===================================================== */
 
+
 function loadQuestion() {
+
 
     const questionData =
         CONFIG.questions[currentQuestion];
 
-    document.getElementById("progress1").textContent =
+
+    if (!questionData) {
+
+        showResult();
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "progress1"
+    ).textContent =
+
         `${String(currentQuestion + 1).padStart(2, "0")} / ${String(CONFIG.questions.length).padStart(2, "0")}`;
 
-    document.getElementById("question").textContent =
+
+    document.getElementById(
+        "question-number"
+    ).textContent =
+
+        `PREGUNTA ${String(currentQuestion + 1).padStart(2, "0")}`;
+
+
+    document.getElementById(
+        "question"
+    ).textContent =
+
         questionData.question;
+
 
     const answersContainer =
         document.getElementById("answers");
 
+
     answersContainer.innerHTML = "";
 
 
-    questionData.answers.forEach((answer, index) => {
+    questionData.answers.forEach(
+        (answer, index) => {
 
-        const button =
-            document.createElement("button");
 
-        button.className = "answer";
+            const button =
+                document.createElement("button");
 
-        button.textContent = answer;
 
-        button.onclick = () =>
-            selectAnswer(button, index);
+            button.className =
+                "answer";
 
-        answersContainer.appendChild(button);
 
-    });
+            button.textContent =
+                answer;
+
+
+            button.onclick = () => {
+
+                selectAnswer(
+                    button,
+                    index
+                );
+
+            };
+
+
+            answersContainer.appendChild(
+                button
+            );
+
+        }
+    );
 
 }
 
 
+
 /* =====================================================
-   RESPONDER NIVEL 1
+   RESPUESTA NIVEL 1
 ===================================================== */
 
-function selectAnswer(button, selectedIndex) {
+
+function selectAnswer(
+    button,
+    selectedIndex
+) {
+
 
     const questionData =
         CONFIG.questions[currentQuestion];
 
+
     const buttons =
-        document.querySelectorAll(".answer");
+        document.querySelectorAll(
+            ".answer"
+        );
 
 
     buttons.forEach(btn => {
+
         btn.disabled = true;
+
     });
 
 
-    if (selectedIndex === questionData.correct) {
+    if (
+        selectedIndex ===
+        questionData.correct
+    ) {
 
-        button.classList.add("correct");
+
+        button.classList.add(
+            "correct"
+        );
+
 
         score++;
 
+
     } else {
 
-        button.classList.add("wrong");
 
-        buttons[questionData.correct]
-            .classList.add("correct");
+        button.classList.add(
+            "wrong"
+        );
+
+
+        if (
+            buttons[
+                questionData.correct
+            ]
+        ) {
+
+            buttons[
+                questionData.correct
+            ].classList.add(
+                "correct"
+            );
+
+        }
 
     }
 
 
     setTimeout(() => {
 
+
         currentQuestion++;
 
-        if (currentQuestion < CONFIG.questions.length) {
+
+        if (
+            currentQuestion <
+            CONFIG.questions.length
+        ) {
+
 
             loadQuestion();
 
+
         } else {
+
 
             showResult();
 
         }
 
-    }, 800);
+
+    }, 850);
 
 }
+
 
 
 /* =====================================================
    RESULTADO NIVEL 1
 ===================================================== */
 
+
 function showResult() {
+
 
     goTo("result1");
 
+
     const percentage =
+
         Math.round(
-            (score / CONFIG.questions.length) * 100
+
+            (
+                score /
+                CONFIG.questions.length
+            ) * 100
+
         );
 
-    let finalPercentage;
 
     /*
-       No queremos que el resultado pueda ser 0%.
+       El resultado visual está diseñado
+       como parte del juego.
 
-       Es un juego romántico, no un examen de universidad 😂
+       Nunca baja demasiado porque esto
+       NO es realmente un examen 😂
     */
 
-    finalPercentage =
+    const finalPercentage =
+
         Math.max(
+
             72,
-            Math.min(99, percentage + 50)
+
+            Math.min(
+                99,
+                percentage + 50
+            )
+
         );
+
+
+    document.getElementById(
+        "compatibility-bar"
+    ).style.width = "0%";
+
+
+    document.getElementById(
+        "compatibility-number"
+    ).textContent = "0%";
 
 
     setTimeout(() => {
 
+
         document.getElementById(
             "compatibility-bar"
         ).style.width =
+
             finalPercentage + "%";
 
 
@@ -319,26 +529,42 @@ function showResult() {
             finalPercentage
         );
 
+
     }, 300);
 
 
     const resultText =
-        document.getElementById("result-text");
+        document.getElementById(
+            "result-text"
+        );
 
 
-    if (score === CONFIG.questions.length) {
+    if (
+        score ===
+        CONFIG.questions.length
+    ) {
+
 
         resultText.textContent =
+
             "Ok... esto empieza a ser sospechoso. Definitivamente sabes demasiado de mí.";
 
-    } else if (score >= 2) {
+
+    } else if (
+        score >= 2
+    ) {
+
 
         resultText.textContent =
+
             "No estuvo nada mal. Creo que podemos seguir adelante.";
+
 
     } else {
 
+
         resultText.textContent =
+
             "Tenemos algunas cosas que conversar... 😂";
 
     }
@@ -346,69 +572,146 @@ function showResult() {
 }
 
 
+
 /* =====================================================
    ANIMAR PORCENTAJE
 ===================================================== */
 
-function animateNumber(elementId, finalNumber) {
+
+function animateNumber(
+    elementId,
+    finalNumber
+) {
+
 
     const element =
-        document.getElementById(elementId);
+        document.getElementById(
+            elementId
+        );
+
 
     let number = 0;
+
 
     const interval =
         setInterval(() => {
 
+
             number++;
+
 
             element.textContent =
                 number + "%";
 
-            if (number >= finalNumber) {
 
-                clearInterval(interval);
+            if (
+                number >= finalNumber
+            ) {
+
+
+                clearInterval(
+                    interval
+                );
 
             }
 
-        }, 20);
+
+        }, 18);
 
 }
 
 
+
 /* =====================================================
-   NIVEL 2
+   COMENZAR NIVEL 2
 ===================================================== */
+
+
+function startLevel2() {
+
+
+    currentWhoQuestion = 0;
+
+
+    loadWhoQuestion();
+
+
+    goTo("level2");
+
+}
+
+
+
+/* =====================================================
+   CARGAR PREGUNTA NIVEL 2
+===================================================== */
+
 
 function loadWhoQuestion() {
 
-    if (
-        currentWhoQuestion >=
-        CONFIG.whoQuestions.length
-    ) {
 
-        currentWhoQuestion = 0;
+    const question =
+        CONFIG.whoQuestions[
+            currentWhoQuestion
+        ];
+
+
+    if (!question) {
+
+
+        finishLevel2();
+
+
+        return;
 
     }
 
+
+    document.getElementById(
+        "who-progress"
+    ).textContent =
+
+        `${String(currentWhoQuestion + 1).padStart(2, "0")} / ${String(CONFIG.whoQuestions.length).padStart(2, "0")}`;
+
+
+    document.getElementById(
+        "who-question-number"
+    ).textContent =
+
+        `PREGUNTA ${String(currentWhoQuestion + 1).padStart(2, "0")}`;
+
+
     document.getElementById(
         "who-question"
-    ).textContent =
-        CONFIG.whoQuestions[currentWhoQuestion];
+    ).textContent = question;
+
+
+    enableWhoButtons();
 
 }
 
 
+
 /* =====================================================
-   RESPONDER "QUIÉN ES MÁS PROBABLE"
+   RESPONDER NIVEL 2
 ===================================================== */
+
 
 function answerWho(person) {
 
-    const resultTitle =
-        document.getElementById(
-            "who-result-title"
+
+    const buttons =
+        document.querySelectorAll(
+            ".duel-buttons button"
         );
+
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+    });
+
 
     const resultText =
         document.getElementById(
@@ -418,64 +721,127 @@ function answerWho(person) {
 
     if (person === "her") {
 
-        resultTitle.textContent =
-            "Respuesta registrada. 👀";
 
         resultText.textContent =
-            "El sistema ha detectado una posible transferencia de responsabilidades.";
+
+            "Respuesta registrada. El sistema ha detectado una posible transferencia de responsabilidades.";
+
 
     } else {
 
-        resultTitle.textContent =
-            "Acepto la acusación. 😂";
 
         resultText.textContent =
-            "Bueno... al menos tienes el valor de decirlo.";
+
+            "Acepto la acusación. 😂 Al menos tienes el valor de decirlo.";
 
     }
 
 
-    goTo("result2");
+    /*
+       Pequeña pausa para que la elección
+       se sienta como una acción del juego.
+    */
 
-    currentWhoQuestion++;
+    setTimeout(() => {
+
+
+        currentWhoQuestion++;
+
+
+        if (
+            currentWhoQuestion <
+            CONFIG.whoQuestions.length
+        ) {
+
+
+            loadWhoQuestion();
+
+
+        } else {
+
+
+            finishLevel2();
+
+        }
+
+
+    }, 650);
 
 }
 
 
+
 /* =====================================================
-   INICIALIZAR NIVEL 2
+   REACTIVAR BOTONES NIVEL 2
 ===================================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
 
-        loadWhoQuestion();
+function enableWhoButtons() {
 
+
+    const buttons =
+        document.querySelectorAll(
+            ".duel-buttons button"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.disabled = false;
+
+    });
+
+}
+
+
+
+/* =====================================================
+   TERMINAR NIVEL 2
+===================================================== */
+
+
+function finishLevel2() {
+
+
+    goTo("result2");
+
+
+    const resultText =
         document.getElementById(
-            "her-name"
-        ).textContent =
-            CONFIG.herName;
+            "who-result"
+        );
 
-    }
-);
+
+    resultText.textContent =
+
+        "Investigación completada. Se han registrado suficientes pruebas para futuras discusiones. 😂";
+
+}
+
 
 
 /* =====================================================
    REGALOS
 ===================================================== */
 
+
 function openGift(number) {
+
 
     const gift =
         CONFIG.gifts[number];
 
-    if (!gift) return;
+
+    if (!gift) {
+
+        return;
+
+    }
 
 
     /*
-       El objeto 4 se desbloquea solamente
-       cuando los primeros tres están abiertos.
+       EL OBJETO 4 ESTÁ BLOQUEADO
+       HASTA ABRIR LOS TRES PRIMEROS.
     */
 
     if (
@@ -483,14 +849,35 @@ function openGift(number) {
         openedGifts < 3
     ) {
 
-        alert(
-            "🔒 Todavía no puedes abrir este objeto.\n\nPrimero abre los otros tres."
+
+        const gift4 =
+            document.getElementById(
+                "gift4"
+            );
+
+
+        gift4.classList.add(
+            "shake"
         );
+
+
+        setTimeout(() => {
+
+            gift4.classList.remove(
+                "shake"
+            );
+
+        }, 500);
+
 
         return;
 
     }
 
+
+    /*
+       Mostrar contenido
+    */
 
     document.getElementById(
         "gift-icon"
@@ -512,18 +899,35 @@ function openGift(number) {
 
     document.getElementById(
         "gift-modal"
-    ).classList.add("show");
+    ).classList.add(
+        "show"
+    );
 
+
+    /*
+       Marcar como abierto
+    */
 
     const giftButton =
-        document.querySelectorAll(".gift")[number - 1];
+        document.getElementById(
+            `gift${number}`
+        );
 
 
-    if (!giftButton.classList.contains("opened")) {
+    if (
+        !giftButton.classList.contains(
+            "opened"
+        )
+    ) {
 
-        giftButton.classList.add("opened");
+
+        giftButton.classList.add(
+            "opened"
+        );
+
 
         openedGifts++;
+
 
         document.getElementById(
             "opened-count"
@@ -534,86 +938,162 @@ function openGift(number) {
 
 
     /*
-       Cuando se abren los 4 regalos,
-       desbloqueamos el siguiente nivel.
+       Desbloquear objeto 4
     */
 
-    if (openedGifts >= 4) {
+    if (
+        openedGifts >= 3
+    ) {
 
-        setTimeout(() => {
 
-            const button =
-                document.createElement("button");
+        const gift4 =
+            document.getElementById(
+                "gift4"
+            );
 
-            button.className =
-                "main-button";
 
-            button.textContent =
-                "CONTINUAR →";
+        gift4.classList.remove(
+            "locked"
+        );
 
-            button.onclick = () =>
-                goTo("level4");
 
-            const container =
-                document.querySelector(
-                    ".boxes-content"
-                );
+        gift4.querySelector(
+            "span"
+        ).textContent =
+            "🔮";
 
-            /*
-               Evitamos duplicarlo.
-            */
+    }
 
-            if (
-                !document.getElementById(
-                    "continue-final"
-                )
-            ) {
 
-                button.id =
-                    "continue-final";
+    /*
+       Desbloquear final
+    */
 
-                container.appendChild(button);
+    if (
+        openedGifts === 4
+    ) {
 
-            }
 
-        }, 500);
+        unlockFinal();
 
     }
 
 }
 
 
+
+/* =====================================================
+   DESBLOQUEAR FINAL
+===================================================== */
+
+
+function unlockFinal() {
+
+
+    const container =
+        document.getElementById(
+            "final-unlock"
+        );
+
+
+    /*
+       Evitar duplicados
+    */
+
+    if (
+        document.getElementById(
+            "continue-final"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const button =
+        document.createElement(
+            "button"
+        );
+
+
+    button.id =
+        "continue-final";
+
+
+    button.className =
+        "main-button";
+
+
+    button.innerHTML =
+        "CONTINUAR <span>→</span>";
+
+
+    button.onclick = () => {
+
+        goTo("level4");
+
+    };
+
+
+    container.appendChild(
+        button
+    );
+
+
+    /*
+       Pequeña animación
+    */
+
+    container.style.animation =
+        "screenIn 0.5s ease";
+
+}
+
+
+
 /* =====================================================
    CERRAR REGALO
 ===================================================== */
 
+
 function closeGift() {
+
 
     document.getElementById(
         "gift-modal"
-    ).classList.remove("show");
+    ).classList.remove(
+        "show"
+    );
 
 }
+
 
 
 /* =====================================================
    CARTA FINAL
 ===================================================== */
 
+
 function showLetter() {
 
+
     goTo("letter");
+
 
     launchConfetti();
 
 }
 
 
+
 /* =====================================================
    CONFETI
 ===================================================== */
 
+
 function launchConfetti() {
+
 
     const container =
         document.getElementById(
@@ -621,10 +1101,25 @@ function launchConfetti() {
         );
 
 
-    for (let i = 0; i < 80; i++) {
+    /*
+       Limpiar confeti anterior
+    */
+
+    container.innerHTML = "";
+
+
+    for (
+        let i = 0;
+        i < 100;
+        i++
+    ) {
+
 
         const piece =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         piece.className =
             "confetti";
@@ -635,32 +1130,45 @@ function launchConfetti() {
 
 
         piece.style.animationDuration =
-            (Math.random() * 2 + 2) + "s";
+
+            (
+                Math.random() * 2 +
+                2
+            ) + "s";
 
 
         piece.style.animationDelay =
-            Math.random() * 1.5 + "s";
+
+            (
+                Math.random() * 1.5
+            ) + "s";
 
 
         piece.style.transform =
+
             `rotate(${Math.random() * 360}deg)`;
 
 
         /*
-           No usamos colores definidos
-           individualmente en CSS.
+           Colores aleatorios para
+           que el confeti sea dinámico.
         */
 
         piece.style.background =
+
             `hsl(${Math.random() * 360}, 60%, 70%)`;
 
 
-        container.appendChild(piece);
+        container.appendChild(
+            piece
+        );
 
 
         setTimeout(() => {
 
+
             piece.remove();
+
 
         }, 5000);
 
@@ -669,21 +1177,75 @@ function launchConfetti() {
 }
 
 
+
 /* =====================================================
    CERRAR MODAL AL HACER CLICK FUERA
 ===================================================== */
 
-document.getElementById(
-    "gift-modal"
-).addEventListener(
-    "click",
-    function(event) {
 
-        if (event.target === this) {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-            closeGift();
 
-        }
+        /*
+           Nombre de ella
+        */
+
+        document.getElementById(
+            "her-name"
+        ).textContent =
+            CONFIG.herName;
+
+
+        /*
+           Preparar modal
+        */
+
+        const modal =
+            document.getElementById(
+                "gift-modal"
+            );
+
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+
+                if (
+                    event.target === modal
+                ) {
+
+
+                    closeGift();
+
+                }
+
+            }
+        );
+
+
+        /*
+           Escape para cerrar modal
+        */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+
+                    closeGift();
+
+                }
+
+            }
+        );
 
     }
 );
